@@ -1,4 +1,4 @@
-package com.muhe.kindy.floatlistview;
+package com.kindy.floatlistview;
 
 /**
  * Created by Kindy on 2015/9/2.

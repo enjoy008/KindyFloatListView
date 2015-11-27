@@ -1,4 +1,4 @@
-package com.muhe.kindy.floatlistview;
+package com.kindy.floatlistview;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

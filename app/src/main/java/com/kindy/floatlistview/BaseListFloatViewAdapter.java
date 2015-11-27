@@ -1,4 +1,4 @@
-package com.muhe.kindy.floatlistview;
+package com.kindy.floatlistview;
 
 import android.view.View;
 import android.widget.AbsListView;
