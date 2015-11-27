@@ -62,10 +62,10 @@ public class MyAdapter extends BaseListFloatViewAdapter<Bean> {
         if(convertView == null) {
             holder = new ViewHolder();
             if(isGroup(position)) {
-                convertView = mLayoutInflater.inflate(R.layout.item, null);
+                convertView = mLayoutInflater.inflate(R.layout.item, parent, false);
                 holder.tv = (TextView) convertView.findViewById(R.id.id_tv_item);
             } else {
-                convertView = mLayoutInflater.inflate(R.layout.item_sub, null);
+                convertView = mLayoutInflater.inflate(R.layout.item_sub, parent, false);
                 holder.tv = (TextView) convertView.findViewById(R.id.id_tv_item_sub);
             }
             convertView.setTag(holder);
