@@ -49,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mMyAdapter = new MyAdapter(this, mData, mFloatView, mOnChangeFloatViewContentListener);
-        mMyAdapter.setHeanderItemCount(mListView.getHeaderViewsCount());
-        mMyAdapter.setDividerHeight(mListView.getDividerHeight());
+        mMyAdapter.setHeaderItemCount(mListView.getHeaderViewsCount());
         mListView.setAdapter(mMyAdapter);
         mListView.setOnScrollListener(mMyAdapter);
     }

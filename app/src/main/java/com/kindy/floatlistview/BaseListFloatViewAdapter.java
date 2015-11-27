@@ -20,20 +20,12 @@ public abstract class BaseListFloatViewAdapter<T> extends BaseAdapter implements
 
     /** 默认为 0 */
     private int mHeaderItemCount;
-    private int mDividerHeight;
-    public void setHeanderItemCount(int count) {
+    public void setHeaderItemCount(int count) {
         mHeaderItemCount = count;
     }
 
     public void setFloatView(View floatView) {
         this.mFloatView = floatView;
-    }
-
-    public void setDividerHeight(int dividerHeight) {
-        if(dividerHeight < 0) {
-            dividerHeight = 0;
-        }
-        mDividerHeight = dividerHeight;
     }
 
     public BaseListFloatViewAdapter(ArrayList<T> mData, View floatView, OnChangeFloatViewContentListener<T> l) {
@@ -118,7 +110,7 @@ public abstract class BaseListFloatViewAdapter<T> extends BaseAdapter implements
         boolean firstIsGroup = this.isGroup(firstVisiblePosition);
         int pre = this.getPreviousGroupPosition(firstVisiblePosition - 1);
         int next = this.getNextGroupPosition(firstVisiblePosition+1);
-        L.o(this, " firstIsGroup : " + firstIsGroup + " pre : " + pre + " next : " + next);
+        L.o(this, " firstIsGroup : " + firstIsGroup + " firstVisiblePosition : " + firstVisiblePosition + " pre : " + pre + " next : " + next);
         if(firstIsGroup) {
             if(firstVisibleItemTop <= 0) {
                 mFloatView.setVisibility(View.VISIBLE);
@@ -126,11 +118,15 @@ public abstract class BaseListFloatViewAdapter<T> extends BaseAdapter implements
                     ViewHelper.setY(mFloatView, 0);
                 } else {
                     View nextView = view.getChildAt(next-firstVisiblePosition);
-                    L.o(this, " next:" + next + " nextView.getTop():" + nextView.getTop());
-                    if(nextView.getTop() > mFloatView.getHeight()) {
+                    if(nextView == null) {
                         ViewHelper.setY(mFloatView, 0);
                     } else {
-                        ViewHelper.setY(mFloatView, nextView.getTop() - mFloatView.getHeight());
+                        L.o(this, " next:" + next + " nextView.getTop():" + nextView.getTop());
+                        if(nextView.getTop() > mFloatView.getHeight()) {
+                            ViewHelper.setY(mFloatView, 0);
+                        } else {
+                            ViewHelper.setY(mFloatView, nextView.getTop() - mFloatView.getHeight());
+                        }
                     }
                 }
                 notifyChangeFloatViewContent(firstVisiblePosition);
@@ -139,8 +135,12 @@ public abstract class BaseListFloatViewAdapter<T> extends BaseAdapter implements
                     mFloatView.setVisibility(View.INVISIBLE);
                 } else {
                     mFloatView.setVisibility(View.VISIBLE);
-                    ViewHelper.setY(mFloatView, firstVisibleItemTop - mFloatView.getHeight());
-                    notifyChangeFloatViewContent(firstVisiblePosition);
+                    if(firstVisibleItemTop > mFloatView.getHeight()) {
+                        ViewHelper.setY(mFloatView, 0);
+                    } else {
+                        ViewHelper.setY(mFloatView, firstVisibleItemTop - mFloatView.getHeight());
+                    }
+                    notifyChangeFloatViewContent(pre);
                 }
             }
         } else {
@@ -154,11 +154,15 @@ public abstract class BaseListFloatViewAdapter<T> extends BaseAdapter implements
                 ViewHelper.setY(mFloatView, 0);
             } else {
                 View nextView = view.getChildAt(next-firstVisiblePosition);
-                L.o(this, " next:" + next + " nextView.getTop():" + nextView.getTop());
-                if(nextView.getTop() > mFloatView.getHeight()) {
+                if(nextView == null) {
                     ViewHelper.setY(mFloatView, 0);
                 } else {
-                    ViewHelper.setY(mFloatView, nextView.getTop() - mFloatView.getHeight());
+                    L.o(this, " next:" + next + " nextView.getTop():" + nextView.getTop());
+                    if(nextView.getTop() > mFloatView.getHeight()) {
+                        ViewHelper.setY(mFloatView, 0);
+                    } else {
+                        ViewHelper.setY(mFloatView, nextView.getTop() - mFloatView.getHeight());
+                    }
                 }
             }
             notifyChangeFloatViewContent(pre);
