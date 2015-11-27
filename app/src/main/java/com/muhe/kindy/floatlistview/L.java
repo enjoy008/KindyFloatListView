@@ -4,11 +4,6 @@ import android.util.Log;
 
 
 public class L {
-	/** 测试开关，主要是LOG开关
-	 * </br> 友盟LOG开关
-	 */
-	public static boolean debug = true;
-	
 	public final static byte O          = 0;  //System.out
 	public final static byte V          = 1;  //verbose
 	public final static byte I          = 2;  //info
@@ -18,7 +13,7 @@ public class L {
 	public final static byte LOG        = 6;  //log.txt
 	public final static byte NULL       = 7;  //no log
 	
-	private static byte model = O;
+	private static byte model = NULL;
 	
 //-------------------- System.out ------------------------------------------
 	public static void o(Object tag, Object... s) {

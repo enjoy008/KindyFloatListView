@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by Kindy on 2015/9/2.
  */
 public abstract class BaseListFloatViewAdapter<T> extends BaseAdapter implements IGroupHelper , AbsListView.OnScrollListener {
-    private static final int NOT_FROUND = -1;
+    private static final int NOT_FOUND = -1;
     protected ArrayList<T> mData;
 
     private View mFloatView;
@@ -41,7 +41,7 @@ public abstract class BaseListFloatViewAdapter<T> extends BaseAdapter implements
         this.mFloatView = floatView;
         this.mOnChangeFloatViewContentListener = l;
         if(mFloatView != null) {
-            // 截断Touche
+            // 截断Touch
             mFloatView.setClickable(true);
         }
         mHeaderItemCount = 0;
@@ -56,7 +56,7 @@ public abstract class BaseListFloatViewAdapter<T> extends BaseAdapter implements
                 }
             }
         }
-        return NOT_FROUND;
+        return NOT_FOUND;
     }
 
     @Override
@@ -68,7 +68,7 @@ public abstract class BaseListFloatViewAdapter<T> extends BaseAdapter implements
                 }
             }
         }
-        return NOT_FROUND;
+        return NOT_FOUND;
     }
 
     @Override
@@ -122,7 +122,7 @@ public abstract class BaseListFloatViewAdapter<T> extends BaseAdapter implements
         if(firstIsGroup) {
             if(firstVisibleItemTop <= 0) {
                 mFloatView.setVisibility(View.VISIBLE);
-                if(next == NOT_FROUND) {
+                if(next == NOT_FOUND) {
                     ViewHelper.setY(mFloatView, 0);
                 } else {
                     View nextView = view.getChildAt(next-firstVisiblePosition);
@@ -135,7 +135,7 @@ public abstract class BaseListFloatViewAdapter<T> extends BaseAdapter implements
                 }
                 notifyChangeFloatViewContent(firstVisiblePosition);
             } else {
-                if(pre == NOT_FROUND) {
+                if(pre == NOT_FOUND) {
                     mFloatView.setVisibility(View.INVISIBLE);
                 } else {
                     mFloatView.setVisibility(View.VISIBLE);
@@ -144,13 +144,13 @@ public abstract class BaseListFloatViewAdapter<T> extends BaseAdapter implements
                 }
             }
         } else {
-            if(pre == NOT_FROUND) {
+            if(pre == NOT_FOUND) {
                 mFloatView.setVisibility(View.INVISIBLE);
                 return;
             }
 
             mFloatView.setVisibility(View.VISIBLE);
-            if(next == NOT_FROUND) {
+            if(next == NOT_FOUND) {
                 ViewHelper.setY(mFloatView, 0);
             } else {
                 View nextView = view.getChildAt(next-firstVisiblePosition);
